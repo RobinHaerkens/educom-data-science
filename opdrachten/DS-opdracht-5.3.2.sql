@@ -1,10 +1,9 @@
 CREATE VIEW v_VERZENDLIJST AS
-SELECT mhl_suppliers.id, IF(mhl_suppliers.p_address = "", (mhl_suppliers.straat + " " + mhl_suppliers.huisnr), mhl_suppliers.p_address) AS "Adres", 
+SELECT mhl_suppliers.id, 
+IF(mhl_suppliers.p_address = "", CONCAT(mhl_suppliers.straat,' ',mhl_suppliers.huisnr), mhl_suppliers.p_address) AS "Adres", 
 mhl_suppliers.postcode AS "postcode",
-CASE
-	WHEN mhl_suppliers.p_address IS NULL THEN  mhl_suppliers.city_ID
-	ELSE mhl_suppliers.p_city_ID
-	END AS "Adres"
+mhl_cities.name AS "stad"
+
 
 
 FROM mhl_suppliers
